@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Naati Mardddddd</title>
+
+<style>
+body{
+font-family: Comic Sans MS;
+background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+text-align:center;
+margin:0;
+padding:0;
+overflow-x:hidden;
+}
+
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px;
+}
+
+h1{font-size:3rem;margin-bottom:10px;}
+
+p{font-size:1.3rem;max-width:650px;}
+
+.card{
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:20px;
+margin:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+img{
+width:220px;
+height:220px;
+object-fit:cover;
+border-radius:20px;
+margin:15px;
+transition:0.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.2) rotate(5deg);
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+font-size:1rem;
+cursor:pointer;
+background:#ff4b7d;
+color:white;
+margin-top:20px;
+}
+
+.meme{font-size:1.4rem;margin-top:10px;}
+
+#musicPlayer{
+position:fixed;
+bottom:20px;
+left:20px;
+background:rgba(0,0,0,0.5);
+padding:10px;
+border-radius:15px;
+}
+
+#soundboard{
+position:fixed;
+right:20px;
+bottom:20px;
+background:rgba(0,0,0,0.5);
+padding:10px;
+border-radius:15px;
+}
+
+#confetti{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+#insultBox{
+font-size:1.5rem;
+margin-top:15px;
+color:#ffd1dc;
+}
+
+#ageResult{
+font-size:1.5rem;
+margin-top:15px;
+color:#ffd1dc;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.modal-content{
+background:#111;
+padding:40px;
+border-radius:20px;
+max-width:600px;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div id="musicPlayer">
+<button onclick="startMusic()">▶ Start Music</button>
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+</div>
+
+<div id="soundboard">
+<button onclick="boom()">Vine Boom</button>
+<button onclick="metal()">Metal Pipe</button>
+</div>
+
+<section>
+<h1>⚠ BREAKING NEWS ⚠</h1>
+<p>Aj ka taaza khabar suniye...</p>
+<div class="card">
+<h2>Ek naati aurat aj buddhi ho gyi hai</h2>
+<p>Scientists confirm: height abhi bhi update nahi hua.</p>
+</div>
+<button onclick="nextSection();boom()">Continue</button>
+</section>
+
+<section>
+<h1>Breaking News</h1>
+<div class="card">
+<p>Naati Ladki hua 15 saal ka.</p>
+<p>Overthinking increased by 90%</p>
+<p>Drama increased by 200%</p>
+<p>Height decreased by 150%</p>
+</div>
+<img src="photo1.jpg">
+</section>
+
+<section>
+<h1>Indian Zoo Index</h1>
+<div class="card">
+<p>Rare Species: Phyllum Overthinker</p>
+<p>Diet: Spicy food + Diet Coke</p>
+<p>Behaviour: Sleeps whole day</p>
+</div>
+<img src="photo2.jpg">
+</section>
+
+<section>
+<h1>Stats</h1>
+<div class="card">
+<p>Drama: 100/10</p>
+<p>Overthinking: 100/10</p>
+<p>Height: -100/10</p>
+<p>Dosti: W</p>
+</div>
+</section>
+
+<section>
+<h1>Random Naati Insult Generator</h1>
+<div class="card">
+<button onclick="generateInsult()">Generate Roast</button>
+<p id="insultBox">Click to reveal scientific facts.</p>
+</div>
+</section>
+
+<section>
+<h1>AI Age Detector</h1>
+<div class="card">
+<button onclick="detectAge()">Scan Face</button>
+<p id="ageResult">AI ready to scan subject...</p>
+</div>
+</section>
+
+<section>
+<h1>Photo Evidence</h1>
+<div class="gallery">
+<img src="photo1.jpg" title="Rare goblin sighting">
+<img src="photo2.jpg" title="Overthinking in natural habitat">
+<img src="photo3.jpg" title="Creature spotted sleeping again">
+</div>
+</section>
+
+<section>
+<h1>Predictable Baatein</h1>
+<div class="card">
+<p class="meme">"Mai soone jaa rhi hu"</p>
+<p class="meme">"Tu gay hai"</p>
+<p class="meme">"Wahh shampyy wahhh"</p>
+</div>
+</section>
+
+<section>
+<h1>Confidential Criminal Record</h1>
+<button onclick="openRecord()">View Secret File</button>
+</section>
+
+<div class="modal" id="recordModal">
+<div class="modal-content">
+<h2>TOP SECRET</h2>
+<p>Crimes committed:</p>
+<p>- HADD SE ZAYDA NAATA HONA</p>
+<p>- HAR CHIZ MAI OVERTHINK KARNA</p>
+<p>- CHOTI CHOTI BAATO PE BARI BARI GAALI DENA</p>
+<p>- PURA DIN SONA</p>
+<button onclick="closeRecord()">Close</button>
+</div>
+</div>
+
+<section>
+<h1>Mazak se haatkee</h1>
+<div class="card">
+<p>Jokes aside tu acchi dost hai.</p>
+<p>Tere bina life boring hota.</p>
+<p>Ab treat dede.</p>
+</div>
+</section>
+
+<section>
+<h1>🎂 Shubh janamdin 🎂</h1>
+<div class="card">
+<p>Stay chaotic.</p>
+<p>Stay naati.</p>
+<p>Treat de.</p>
+</div>
+<button onclick="rickroll()">DO NOT CLICK</button>
+</section>
+
+<script>
+
+function nextSection(){window.scrollBy({top:window.innerHeight,behavior:'smooth'});}
+
+function startMusic(){
+const music=document.getElementById('music');
+music.volume=0;
+music.play();
+
+let vol=0;
+const fade=setInterval(()=>{
+if(vol<0.5){
+vol+=0.02;
+music.volume=vol;
+}else{clearInterval(fade);} },200);
+}
+
+function rickroll(){window.open('https://youtu.be/dQw4w9WgXcQ');}
+
+function boom(){var a=new Audio('https://www.myinstants.com/media/sounds/vine-boom.mp3');a.play();}
+
+function metal(){var a=new Audio('https://www.myinstants.com/media/sounds/metal-pipe.mp3');a.play();}
+
+function generateInsult(){
+const insults=[
+"Tere liye high five medium 3 hota hai baunii",
+"Agar chota height hona crime hota tu phaasi kha jaati",
+"Itni naati hai microscope bhi kam pad jayega",
+"Certified chaos goblin",
+"Tu itni naati hai hawa tez chale to missing report likhni pade",
+"School assembly me tujhe ground floor milta hai",
+"Teri height ka wifi signal weak hai",
+"Crowd me tujhe search nahi scan karna padta hai"
+];
+
+const random=insults[Math.floor(Math.random()*insults.length)];
+document.getElementById('insultBox').innerText=random;
+}
+
+function detectAge(){
+const results=[
+"Scanning... Height detected: 3ft (maybe)",
+"Mental age detected: 67",
+"Actual age: 15 but behaviour: retired uncle",
+"AI confused... goblin species detected",
+"Error: subject too smol to calculate"
+];
+
+const r=results[Math.floor(Math.random()*results.length)];
+document.getElementById('ageResult').innerText=r;
+}
+
+function openRecord(){document.getElementById('recordModal').style.display='flex';}
+
+function closeRecord(){document.getElementById('recordModal').style.display='none';}
+
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let pieces=[];
+
+for(let i=0;i<120;i++){
+pieces.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*6+2});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+for(let p of pieces){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}
+update();
+}
+
+function update(){
+for(let p of pieces){p.y+=1;if(p.y>canvas.height){p.y=0;p.x=Math.random()*canvas.width;}}
+}
+
+setInterval(draw,30);
+
+</script>
+
+</body>
+</html>

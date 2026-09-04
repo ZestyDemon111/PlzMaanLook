@@ -1,189 +1,427 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>I'm Sorry</title>
 
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap');
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
- margin:0;color:#eee;font-family:Georgia,serif;text-align:center;
- background:linear-gradient(180deg,#12090d,#09070a,#251018);
- background-attachment:fixed;transition:background 1s;
+    margin:0;
+    min-height:100vh;
+    color:#f5eeee;
+    text-align:center;
+    font-family:"Cormorant Garamond",serif;
+    background:
+        radial-gradient(circle at 50% 0%,#3a1722 0%,#120a10 35%,#050507 100%);
+    background-attachment:fixed;
+    transition:background 1.5s ease;
 }
+
+/* SOFT LIGHT */
+
+.glow{
+    position:fixed;
+    width:350px;
+    height:350px;
+    border-radius:50%;
+    background:#c9788750;
+    filter:blur(100px);
+    top:-180px;
+    left:50%;
+    transform:translateX(-50%);
+    pointer-events:none;
+}
+
+/* OPENING */
 
 #start{
- position:fixed;inset:0;z-index:10;background:#08070a;
- display:flex;align-items:center;justify-content:center;
- flex-direction:column;cursor:pointer;transition:1s;
-}
-
-.envelope{
- width:180px;height:120px;background:#b97979;
- position:relative;box-shadow:0 0 45px #b9797955;transition:.8s;
-}
-
-.envelope:before{
- content:"";position:absolute;inset:0;
- border-left:90px solid transparent;
- border-right:90px solid transparent;
- border-top:65px solid #d99a9a;
-}
-
-#start p{
- margin-top:30px;color:#aaa;font-style:italic;
+    position:fixed;
+    inset:0;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:
+        radial-gradient(circle,#29131c,#08070a 65%);
+    cursor:pointer;
+    transition:1.2s ease;
 }
 
 .open{
- opacity:0;transform:scale(1.3);pointer-events:none;
+    opacity:0;
+    transform:scale(1.08);
+    pointer-events:none;
 }
+
+/* ENVELOPE */
+
+.envelope{
+    width:210px;
+    height:140px;
+    position:relative;
+    background:linear-gradient(145deg,#a9646d,#75434c);
+    border-radius:5px;
+    box-shadow:
+        0 25px 60px #000,
+        0 0 50px #d98a9650;
+    transition:.8s;
+}
+
+.envelope:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-left:105px solid transparent;
+    border-right:105px solid transparent;
+    border-top:75px solid #d08a92;
+}
+
+.envelope:after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0;
+    height:0;
+    border-left:105px solid #673a42;
+    border-top:70px solid transparent;
+}
+
+.openText{
+    margin-top:32px;
+    font-size:15px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#cbb8bc;
+}
+
+/* MAIN */
 
 #poem{
- max-width:650px;margin:auto;padding:90px 25px;
+    max-width:700px;
+    margin:auto;
+    padding:100px 24px 40px;
 }
 
-h1{
- font-size:clamp(45px,10vw,70px);
- font-weight:normal;color:#e8aaaa;margin-bottom:80px;
+/* TITLE */
+
+.title{
+    font-family:"Playfair Display",serif;
+    font-size:clamp(48px,14vw,78px);
+    font-weight:400;
+    margin:0;
+    color:#f2c6c9;
+    text-shadow:0 0 35px #d7838d35;
 }
 
-.stanza{margin:80px 0}
+.subtitle{
+    margin-top:15px;
+    color:#a9959a;
+    font-size:16px;
+    font-style:italic;
+    letter-spacing:1px;
+}
 
-p{
- font-size:20px;line-height:1.9;
+/* DIVIDERS */
+
+.line{
+    width:70px;
+    height:1px;
+    margin:45px auto;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #d99aa2,
+        transparent
+    );
+}
+
+/* POEM */
+
+.stanza{
+    margin:75px 0;
+    opacity:0;
+    transform:translateY(35px);
+    transition:1.2s ease;
+}
+
+.stanza.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.stanza p{
+    margin:5px 0;
+    font-size:clamp(20px,5vw,25px);
+    line-height:1.75;
+    color:#eee4e5;
 }
 
 .red{
- color:#e8aaaa;font-style:italic;
+    color:#e4a1a8 !important;
+    font-style:italic;
+}
+
+/* FINAL MESSAGE */
+
+.final{
+    margin-top:110px;
+    padding-bottom:60px;
+}
+
+.finalText{
+    color:#a99a9e;
+    font-size:16px;
+    letter-spacing:1px;
+    font-style:italic;
 }
 
 /* PHOTO */
 
-.photo-section{
- margin-top:140px;
- padding-bottom:100px;
+.photoSection{
+    margin-top:70px;
 }
 
-.photo-section h2{
- font-size:28px;
- font-weight:normal;
- color:#e8aaaa;
- margin-bottom:15px;
+.photoTitle{
+    font-family:"Playfair Display",serif;
+    font-size:28px;
+    font-weight:400;
+    color:#edb7bc;
+    margin-bottom:8px;
 }
 
-.photo-section p{
- font-size:16px;
- color:#999;
- margin-bottom:30px;
+.photoHint{
+    color:#897b80;
+    font-size:15px;
+    margin-bottom:28px;
+}
+
+.photoFrame{
+    padding:8px;
+    width:min(92%,500px);
+    margin:auto;
+    background:linear-gradient(
+        145deg,
+        #ffffff18,
+        #ffffff05
+    );
+    border:1px solid #ffffff18;
+    border-radius:12px;
+    box-shadow:
+        0 25px 70px #000,
+        0 0 50px #b66b7830;
 }
 
 .photo{
- width:min(90%,500px);
- border-radius:12px;
- border:1px solid #ffffff22;
- box-shadow:0 0 40px #000;
- display:block;
- margin:auto;
+    display:block;
+    width:100%;
+    border-radius:7px;
 }
+
+/* MUSIC */
 
 .music{
- position:fixed;right:20px;bottom:20px;z-index:5;
- width:48px;height:48px;border:0;border-radius:50%;
- background:#e8aaaa;color:#09070a;font-size:20px;
- cursor:pointer;box-shadow:0 0 20px #e8aaaa55;
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:15;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    border:1px solid #ffffff30;
+    background:#e2a4aa;
+    color:#160c10;
+    font-size:20px;
+    box-shadow:0 8px 30px #000;
+    cursor:pointer;
 }
 
-#youtube{
- position:fixed;width:1px;height:1px;
- left:-100px;top:-100px;
+/* MOBILE */
+
+@media(max-width:600px){
+
+    #poem{
+        padding:85px 22px 30px;
+    }
+
+    .envelope{
+        width:185px;
+        height:125px;
+    }
+
+    .envelope:before{
+        border-left-width:92px;
+        border-right-width:92px;
+    }
+
+    .stanza{
+        margin:65px 0;
+    }
+
+    .stanza p{
+        font-size:21px;
+        line-height:1.8;
+    }
+
+    .music{
+        width:48px;
+        height:48px;
+        right:15px;
+        bottom:15px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ENVELOPE -->
+<div class="glow"></div>
+
+
+<!-- OPENING -->
 
 <div id="start" onclick="openLetter()">
- <div class="envelope"></div>
- <p>Tap to open</p>
+
+    <div class="envelope"></div>
+
+    <div class="openText">
+        Tap to open
+    </div>
+
 </div>
 
-<!-- YOUTUBE MUSIC -->
+
+<!-- HIDDEN YOUTUBE -->
 
 <div id="youtube"></div>
 
+
+<!-- MUSIC BUTTON -->
+
 <button class="music" onclick="toggleMusic()">♫</button>
 
-<!-- POEM -->
 
-<div id="poem">
+<!-- LETTER -->
 
-<h1>I'm Sorry.</h1>
+<main id="poem">
 
-<div class="stanza">
-<p>
-You saw my side of the story, which I hate,<br>
-You read the words I cannot undo.
-</p>
+    <h1 class="title">I'm Sorry.</h1>
 
-<p>
-From the bottom of my heart,<br>
-I apologise for the pain it gave to you.
-</p>
-</div>
+    <div class="subtitle">
+        From the bottom of my heart
+    </div>
 
-<div class="stanza">
-<p>
-I was upset, mad and out of my mind,<br>
-But that doesn't make it right.
-</p>
-
-<p>
-I cannot blame it on my anger<br>
-Or pretend that I wasn't wrong.
-</p>
-</div>
-
-<div class="stanza">
-<p>
-Because hurting someone you love<br>
-Can make you regret it for long.
-</p>
-</div>
-
-<div class="stanza">
-<p>
-If my words made you doubt<br>
-The love I truly feel,
-</p>
-
-<p class="red">
-I deeply apologise.
-</p>
-
-<p class="red">
-I hope, with time,<br>
-this scar can heal.
-</p>
-</div>
+    <div class="line"></div>
 
 
-<!-- PHOTO AT THE END -->
+    <div class="stanza">
 
-<div class="photo-section">
+        <p>You saw my side of the story, which I hate,</p>
+        <p>You read the words I cannot undo.</p>
 
-<h2>One last thing...</h2>
+        <br>
 
-<p>A memory worth keeping.</p>
+        <p>From the bottom of my heart,</p>
+        <p>I apologise for the pain it gave to you.</p>
 
-<img src="photo.jpg" class="photo">
+    </div>
 
-</div>
 
-</div>
+    <div class="line"></div>
 
+
+    <div class="stanza">
+
+        <p>I was upset, mad and out of my mind,</p>
+        <p>But that doesn't make it right.</p>
+
+        <br>
+
+        <p>I cannot blame it on my anger</p>
+        <p>Or pretend that I wasn't wrong.</p>
+
+    </div>
+
+
+    <div class="line"></div>
+
+
+    <div class="stanza">
+
+        <p>Because hurting someone you love</p>
+        <p>Can make you regret it for long.</p>
+
+    </div>
+
+
+    <div class="line"></div>
+
+
+    <div class="stanza">
+
+        <p>If my words made you doubt</p>
+        <p>The love I truly feel,</p>
+
+        <br>
+
+        <p class="red">I deeply apologise.</p>
+
+        <br>
+
+        <p class="red">
+            I hope, with time,<br>
+            this scar can heal.
+        </p>
+
+    </div>
+
+
+    <!-- PHOTO -->
+
+    <div class="final">
+
+        <div class="photoSection">
+
+            <div class="photoTitle">
+                One last thing...
+            </div>
+
+            <div class="photoHint">
+                A memory worth keeping.
+            </div>
+
+            <div class="photoFrame">
+
+                <!-- CHANGE photo.jpg TO YOUR IMAGE -->
+
+                <img
+                    src="photo.jpg"
+                    class="photo"
+                    alt="Our memory"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- YOUTUBE API -->
 
 <script src="https://www.youtube.com/iframe_api"></script>
 
@@ -194,69 +432,124 @@ let playing=false;
 
 const VIDEO_ID="Cb6wuzOurPc";
 
+
 function onYouTubeIframeAPIReady(){
 
- player=new YT.Player("youtube",{
-  height:"1",
-  width:"1",
-  videoId:VIDEO_ID,
-  playerVars:{
-   autoplay:0,
-   controls:0,
-   loop:1,
-   playlist:VIDEO_ID
-  }
- });
+    player=new YT.Player("youtube",{
+
+        height:"1",
+        width:"1",
+
+        videoId:VIDEO_ID,
+
+        playerVars:{
+            autoplay:0,
+            controls:0,
+            loop:1,
+            playlist:VIDEO_ID
+        }
+
+    });
 
 }
+
+
+/* OPEN */
 
 function openLetter(){
 
- document.getElementById("start").classList.add("open");
+    document.getElementById("start")
+        .classList.add("open");
 
- setTimeout(()=>{
+    setTimeout(()=>{
 
-  document.getElementById("start").style.display="none";
+        document.getElementById("start")
+            .style.display="none";
 
-  if(player){
-   player.playVideo();
-   playing=true;
-  }
+        if(player){
 
- },800);
+            player.playVideo();
+            playing=true;
+
+        }
+
+        reveal();
+
+    },900);
 
 }
+
+
+/* MUSIC */
 
 function toggleMusic(){
 
- if(!player)return;
+    if(!player)return;
 
- if(playing){
-  player.pauseVideo();
-  playing=false;
- }else{
-  player.playVideo();
-  playing=true;
- }
+    if(playing){
+
+        player.pauseVideo();
+        playing=false;
+
+    }else{
+
+        player.playVideo();
+        playing=true;
+
+    }
 
 }
 
+
+/* SCROLL REVEAL */
+
+function reveal(){
+
+    const items=document.querySelectorAll(".stanza");
+
+    const observer=new IntersectionObserver(
+        entries=>{
+
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+                    entry.target.classList.add("show");
+                }
+
+            });
+
+        },
+        {threshold:.15}
+    );
+
+    items.forEach(item=>observer.observe(item));
+
+}
+
+reveal();
+
+
+/* BACKGROUND GRADIENT */
+
 window.addEventListener("scroll",()=>{
 
- let max=document.body.scrollHeight-window.innerHeight;
- let progress=max>0?window.scrollY/max:0;
+    let max=document.body.scrollHeight-window.innerHeight;
 
- let r=Math.round(18+progress*30);
- let g=Math.round(7+progress*5);
- let b=Math.round(12+progress*25);
+    let progress=max>0
+        ?window.scrollY/max
+        :0;
 
- document.body.style.background=
- `linear-gradient(
-  180deg,
-  rgb(${r},${g},${b}),
-  #08070a,
-  rgb(${r+15},${g},${b+10})
- )`;
+    let r=Math.round(18+progress*35);
+    let g=Math.round(7+progress*5);
+    let b=Math.round(12+progress*25);
+
+    document.body.style.background=
+    `radial-gradient(
+        circle at ${50+progress*20}% ${progress*100}%,
+        rgb(${r+20},${g+8},${b+10}) 0%,
+        rgb(${r},${g},${b}) 40%,
+        #050507 100%
+    )`;
 
 });
 

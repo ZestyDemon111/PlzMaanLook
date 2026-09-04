@@ -1,329 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Naati Mardddddd</title>
+<title>I'm Sorry</title>
 
 <style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+
 body{
-font-family: Comic Sans MS;
-background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-color:white;
-text-align:center;
-margin:0;
-padding:0;
-overflow-x:hidden;
+ margin:0;color:#eee;font-family:Georgia,serif;text-align:center;
+ background:linear-gradient(180deg,#12090d,#09070a,#251018);
+ background-attachment:fixed;transition:background 1s;
 }
 
-section{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:40px;
+#start{
+ position:fixed;inset:0;z-index:10;background:#08070a;
+ display:flex;align-items:center;justify-content:center;
+ flex-direction:column;cursor:pointer;transition:1s;
 }
 
-h1{font-size:3rem;margin-bottom:10px;}
-
-p{font-size:1.3rem;max-width:650px;}
-
-.card{
-background:rgba(255,255,255,0.1);
-backdrop-filter:blur(10px);
-padding:30px;
-border-radius:20px;
-margin:20px;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
+.envelope{
+ width:180px;height:120px;background:#b97979;
+ position:relative;box-shadow:0 0 45px #b9797955;transition:.8s;
 }
 
-img{
-width:220px;
-height:220px;
-object-fit:cover;
-border-radius:20px;
-margin:15px;
-transition:0.3s;
+.envelope:before{
+ content:"";position:absolute;inset:0;
+ border-left:90px solid transparent;
+ border-right:90px solid transparent;
+ border-top:65px solid #d99a9a;
 }
 
-.gallery img:hover{
-transform:scale(1.2) rotate(5deg);
+#start p{
+ margin-top:30px;color:#aaa;font-style:italic;
 }
 
-button{
-padding:12px 25px;
-border:none;
-border-radius:25px;
-font-size:1rem;
-cursor:pointer;
-background:#ff4b7d;
-color:white;
-margin-top:20px;
+.open{
+ opacity:0;transform:scale(1.3);pointer-events:none;
 }
 
-.meme{font-size:1.4rem;margin-top:10px;}
-
-#musicPlayer{
-position:fixed;
-bottom:20px;
-left:20px;
-background:rgba(0,0,0,0.5);
-padding:10px;
-border-radius:15px;
+#poem{
+ max-width:650px;margin:auto;padding:90px 25px;
 }
 
-#soundboard{
-position:fixed;
-right:20px;
-bottom:20px;
-background:rgba(0,0,0,0.5);
-padding:10px;
-border-radius:15px;
+h1{
+ font-size:clamp(45px,10vw,70px);
+ font-weight:normal;color:#e8aaaa;margin-bottom:80px;
 }
 
-#confetti{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
+.stanza{margin:80px 0}
+
+p{
+ font-size:20px;line-height:1.9;
 }
 
-#insultBox{
-font-size:1.5rem;
-margin-top:15px;
-color:#ffd1dc;
+.red{
+ color:#e8aaaa;font-style:italic;
 }
 
-#ageResult{
-font-size:1.5rem;
-margin-top:15px;
-color:#ffd1dc;
+/* PHOTO */
+
+.photo-section{
+ margin-top:140px;
+ padding-bottom:100px;
 }
 
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
+.photo-section h2{
+ font-size:28px;
+ font-weight:normal;
+ color:#e8aaaa;
+ margin-bottom:15px;
 }
 
-.modal-content{
-background:#111;
-padding:40px;
-border-radius:20px;
-max-width:600px;
+.photo-section p{
+ font-size:16px;
+ color:#999;
+ margin-bottom:30px;
 }
 
+.photo{
+ width:min(90%,500px);
+ border-radius:12px;
+ border:1px solid #ffffff22;
+ box-shadow:0 0 40px #000;
+ display:block;
+ margin:auto;
+}
+
+.music{
+ position:fixed;right:20px;bottom:20px;z-index:5;
+ width:48px;height:48px;border:0;border-radius:50%;
+ background:#e8aaaa;color:#09070a;font-size:20px;
+ cursor:pointer;box-shadow:0 0 20px #e8aaaa55;
+}
+
+#youtube{
+ position:fixed;width:1px;height:1px;
+ left:-100px;top:-100px;
+}
 </style>
 </head>
 
 <body>
 
-<canvas id="confetti"></canvas>
+<!-- ENVELOPE -->
 
-<div id="musicPlayer">
-<button onclick="startMusic()">▶ Start Music</button>
-<audio id="music" loop>
-<source src="CountOnMe.mp3" type="audio/mpeg">
-</audio>
+<div id="start" onclick="openLetter()">
+ <div class="envelope"></div>
+ <p>Tap to open</p>
 </div>
 
-<section>
-<h1>⚠ BREAKING NEWS ⚠</h1>
-<p>Aj ka taaza khabar suniye...</p>
-<div class="card">
-<h2>Ek naati aurat aj buddhi ho gyi hai</h2>
-<p>Scientists confirm: height abhi bhi update nahi hua.</p>
-</div>
-<button onclick="nextSection();boom()">Continue</button>
-</section>
+<!-- YOUTUBE MUSIC -->
 
-<section>
-<h1>Breaking News</h1>
-<div class="card">
-<p>Naati Ladki hua 15 saal ka.</p>
-<p>Overthinking increased by 90%</p>
-<p>Drama increased by 200%</p>
-<p>Height decreased by 150%</p>
-</div>
-<img src="image1.png">
-</section>
+<div id="youtube"></div>
 
-<section>
-<h1>Indian Zoo Index</h1>
-<div class="card">
-<p>Rare Species: Phyllum Overthinker</p>
-<p>Diet: Spicy food + Diet Coke</p>
-<p>Behaviour: Sleeps whole day</p>
-</div>
-<img src="image2.jpeg">
-</section>
+<button class="music" onclick="toggleMusic()">♫</button>
 
-<section>
-<h1>Stats</h1>
-<div class="card">
-<p>Drama: 100/10</p>
-<p>Overthinking: 100/10</p>
-<p>Height: -100/10</p>
-<p>Dosti: W</p>
-</div>
-</section>
+<!-- POEM -->
 
-<section>
-<h1>Random Naati Insult Generator</h1>
-<div class="card">
-<button onclick="generateInsult()">Generate Roast</button>
-<p id="insultBox">Click to reveal scientific facts.</p>
-</div>
-</section>
+<div id="poem">
 
-<section>
-<h1>AI Age Detector</h1>
-<div class="card">
-<button onclick="detectAge()">Scan Face</button>
-<p id="ageResult">AI ready to scan subject...</p>
-</div>
-</section>
+<h1>I'm Sorry.</h1>
 
-<section>
-<h1>Predictable Baatein</h1>
-<div class="card">
-<p class="meme">"Mai soone jaa rhi hu"</p>
-<p class="meme">"Tu gay hai"</p>
-<p class="meme">"Wahh shampyy wahhh"</p>
-</div>
-<img src="image3.jpeg">
-</section>
+<div class="stanza">
+<p>
+You saw my side of the story, which I hate,<br>
+You read the words I cannot undo.
+</p>
 
-<section>
-<h1>Confidential Criminal Record</h1>
-<button onclick="openRecord()">View Secret File</button>
-</section>
-
-<div class="modal" id="recordModal">
-<div class="modal-content">
-<h2>TOP SECRET</h2>
-<p>Crimes committed:</p>
-<p>- HADD SE ZAYDA NAATA HONA</p>
-<p>- HAR CHIZ MAI OVERTHINK KARNA</p>
-<p>- CHOTI CHOTI BAATO PE BARI BARI GAALI DENA</p>
-<p>- PURA DIN SONA</p>
-<button onclick="closeRecord()">Close</button>
-</div>
+<p>
+From the bottom of my heart,<br>
+I apologise for the pain it gave to you.
+</p>
 </div>
 
-<section>
-<h1>Mazak se haatkee</h1>
-<div class="card">
-<p>Jokes aside tu acchi dost hai.</p>
-<p>Even though acche se jaane huye zyda din nhi hua.</p>
-<p>You are still one of the closest people in my life.</p>
-<p>Tere bina life boring hota.</p>
-<p>Ab treat dede.</p>
-</div>
-</section>
+<div class="stanza">
+<p>
+I was upset, mad and out of my mind,<br>
+But that doesn't make it right.
+</p>
 
-<section>
-<h1>🎂 Shubh janamdin 🎂</h1>
-<div class="card">
-<p>Stay chaotic.</p>
-<p>Stay naati.</p>
-<p>Treat de.</p>
+<p>
+I cannot blame it on my anger<br>
+Or pretend that I wasn't wrong.
+</p>
 </div>
-<button onclick="rickroll()">DO NOT CLICK</button>
-</section>
+
+<div class="stanza">
+<p>
+Because hurting someone you love<br>
+Can make you regret it for long.
+</p>
+</div>
+
+<div class="stanza">
+<p>
+If my words made you doubt<br>
+The love I truly feel,
+</p>
+
+<p class="red">
+I deeply apologise.
+</p>
+
+<p class="red">
+I hope, with time,<br>
+this scar can heal.
+</p>
+</div>
+
+
+<!-- PHOTO AT THE END -->
+
+<div class="photo-section">
+
+<h2>One last thing...</h2>
+
+<p>A memory worth keeping.</p>
+
+<img src="photo.jpg" class="photo">
+
+</div>
+
+</div>
+
+
+<script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
 
-function nextSection(){window.scrollBy({top:window.innerHeight,behavior:'smooth'});}
+let player;
+let playing=false;
 
-function startMusic(){
-const music=document.getElementById('music');
-music.volume=0;
-music.play();
+const VIDEO_ID="Cb6wuzOurPc";
 
-let vol=0;
-const fade=setInterval(()=>{
-if(vol<0.5){
-vol+=0.02;
-music.volume=vol;
-}else{clearInterval(fade);} },200);
+function onYouTubeIframeAPIReady(){
+
+ player=new YT.Player("youtube",{
+  height:"1",
+  width:"1",
+  videoId:VIDEO_ID,
+  playerVars:{
+   autoplay:0,
+   controls:0,
+   loop:1,
+   playlist:VIDEO_ID
+  }
+ });
+
 }
 
-function rickroll(){window.open('https://youtube.com/shorts/tTZVDAtNrZE?si=XEYLgLJ4a7B3mdEm');}
+function openLetter(){
 
-function boom(){var a=new Audio('https://www.myinstants.com/media/sounds/vine-boom.mp3');a.play();}
+ document.getElementById("start").classList.add("open");
 
-function metal(){var a=new Audio('https://www.myinstants.com/media/sounds/metal-pipe.mp3');a.play();}
+ setTimeout(()=>{
 
-function generateInsult(){
-const insults=[
-"Tere liye high five medium 3 hota hai baunii",
-"Agar chota height hona crime hota tu phaasi kha jaati",
-"Itni naati hai microscope bhi kam pad jayega",
-"Certified chaos goblin",
-"Tu itni naati hai hawa tez chale to missing report likhni pade",
-"School assembly me tujhe ground floor milta hai",
-"Teri height ka wifi signal weak hai",
-"Crowd me tujhe search nahi scan karna padta hai"
-];
+  document.getElementById("start").style.display="none";
 
-const random=insults[Math.floor(Math.random()*insults.length)];
-document.getElementById('insultBox').innerText=random;
+  if(player){
+   player.playVideo();
+   playing=true;
+  }
+
+ },800);
+
 }
 
-function detectAge(){
-const results=[
-"Scanning... Height detected: 3ft (maybe)",
-"Mental age detected: 67",
-"Actual age: 15 but behaviour: retired uncle",
-"AI confused... goblin species detected",
-"Error: subject too smol to calculate"
-];
+function toggleMusic(){
 
-const r=results[Math.floor(Math.random()*results.length)];
-document.getElementById('ageResult').innerText=r;
+ if(!player)return;
+
+ if(playing){
+  player.pauseVideo();
+  playing=false;
+ }else{
+  player.playVideo();
+  playing=true;
+ }
+
 }
 
-function openRecord(){document.getElementById('recordModal').style.display='flex';}
+window.addEventListener("scroll",()=>{
 
-function closeRecord(){document.getElementById('recordModal').style.display='none';}
+ let max=document.body.scrollHeight-window.innerHeight;
+ let progress=max>0?window.scrollY/max:0;
 
-const canvas=document.getElementById("confetti");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+ let r=Math.round(18+progress*30);
+ let g=Math.round(7+progress*5);
+ let b=Math.round(12+progress*25);
 
-let pieces=[];
+ document.body.style.background=
+ `linear-gradient(
+  180deg,
+  rgb(${r},${g},${b}),
+  #08070a,
+  rgb(${r+15},${g},${b+10})
+ )`;
 
-for(let i=0;i<120;i++){
-pieces.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*6+2});
-}
-
-function draw(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="white";
-for(let p of pieces){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}
-update();
-}
-
-function update(){
-for(let p of pieces){p.y+=1;if(p.y>canvas.height){p.y=0;p.x=Math.random()*canvas.width;}}
-}
-
-setInterval(draw,30);
+});
 
 </script>
 
 </body>
 </html>
-
-
